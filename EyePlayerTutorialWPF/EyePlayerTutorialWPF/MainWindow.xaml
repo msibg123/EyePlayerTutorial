@@ -1,0 +1,186 @@
+﻿<Window x:Class="EyePlayerTutorialWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:eyeX="clr-namespace:EyeXFramework.Wpf;assembly=EyeXFramework"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="800"
+        WindowState="Maximized"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen" KeyDown="keyFunctions">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.9*" />
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="25.3*" />
+            
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="11*" />
+            <RowDefinition Height="67*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Grid.RowSpan="4"  Background="darkturquoise" />
+        <Border Grid.ColumnSpan="3" Grid.Row="0"  Background="darkturquoise" />
+        <Border Grid.Column="2" Grid.RowSpan="4" Background="darkturquoise" />
+        <Border Grid.ColumnSpan="3" Grid.Row="4"  Background="darkturquoise" />
+        
+        <Border Grid.Column="3" Grid.Row="0" Grid.RowSpan="3">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="1.204,0.5" StartPoint="0.056,0.5">
+                    <GradientStop Color="#FF636A7C" Offset="0" />
+                    <GradientStop Color="#FF636A7C" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        
+        <Border Grid.Column="3" Grid.Row="3" Grid.RowSpan="3">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="1.204,0.5" StartPoint="0.056,0.5">
+                    <GradientStop Color="#FF393C46" Offset="0" />
+                    <GradientStop Color="#FF393C46" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Image Name="stepsDisplay" Source="media\step_00.png" Grid.Column="3" Grid.Row="3"/>
+
+        <MediaElement LoadedBehavior="Manual" Name="clickSound" Source="media/click.mp3" />
+        <MediaElement LoadedBehavior="Manual" Name="successSound" Source="media/success.wav" Volume="0.3"/>
+
+        <Border Background="black" Name="appStart" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="5" Visibility="Visible" KeyDown="appStart_KeyDown">
+            <Grid>
+                <Image Name="appStartLogo" Width="360" Height="450" Source="media/eyeplayer_logo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0 ,0"/>
+                <TextBlock Name="appStartText" Foreground="AliceBlue" Text="這是你的眼睛訊號，按ENTER繼續"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,600,0,0" FontSize="50" Visibility="Hidden"/>
+            </Grid>
+        </Border>
+        
+        <Grid Name="appChoose" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="5" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <ImageBrush ImageSource="media/bg_02.jpg"/>
+            </Grid.Background>
+            <Image Name="eyeplayer_01" Grid.Column="0" Width="700" Height="700" Source="media/eyeplayer_01.png" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="200, 0, 0 ,0"/>
+            <Image Name="eyeplayer_01_h" Grid.Column="0" Width="700" Height="700" Source="media/eyeplayer_01_h.png" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="200, 0, 0 ,0" Visibility="Hidden"/>
+            <Image Name="eyeplayer_02" Grid.Column="1" Width="700" Height="700" Source="media/eyeplayer_02.png" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 200 ,0"/>
+            <Image Name="eyeplayer_02_h" Grid.Column="1" Width="700" Height="700" Source="media/eyeplayer_02_h.png" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 200 ,0" Visibility="Hidden"/>
+
+            <Ellipse Name="chooseCircle1" Grid.Column="0" Fill="Yellow" Opacity="0.8" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" Width="200" Height="200" Margin="200, 0, 0 ,0"/>
+            <Ellipse Name="chooseCircle2" Grid.Column="1" Fill="Yellow" Opacity="0.8" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" Width="200" Height="200" Margin="0, 0, 200 ,0"/>
+        </Grid>
+
+        <Image x:Name="scrollUpFixed" Source="media/scrollUp.jpg" Stretch="Fill" Grid.Column="1" Grid.Row="1" Visibility="Hidden"/>
+
+        <Grid Name="scrollRegion" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Name="scrollViewer" VerticalScrollBarVisibility="Visible" Grid.Row="0" Grid.RowSpan="3">
+                <Image Source="media/scrollDown.jpeg" Stretch="Fill"/>
+            </ScrollViewer>
+            
+            <Border Name="lookUpBorder" Grid.Row="0" Opacity="0.9">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="1.204,0.5" StartPoint="0.056,0.5">
+                        <GradientStop Color="#FF393C46" Offset="0" />
+                        <GradientStop Color="#FF393C46" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Image Name="scrollUp" Source="media\arrow_top.png" Grid.Row="0"/>
+            
+            <Border Name="lookDownBorder" Grid.Row="2" Opacity="0.9">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="1.204,0.5" StartPoint="0.056,0.5">
+                        <GradientStop Color="#FF393C46" Offset="0" />
+                        <GradientStop Color="#FF393C46" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Image Name="scrollDown" Source="media\arrow_bottom.png" Grid.Row="2"/>
+        </Grid>
+        
+        <Border Name="scrollFinish" Background="Black" Opacity="0.9" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Visibility="Hidden">
+            <Grid>
+                <TextBlock Name="scrollFinishText1" Foreground="AliceBlue" Text="恭喜你完成了滾輪滑動功能的評估!"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+                <TextBlock Name="scrollFinishText2" Foreground="AliceBlue" Text="接下來請幫我注視你想要選擇的預告片"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+            </Grid>
+        </Border>
+
+        <Grid Name="clickVideo" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Border Name="clickBorder" Grid.Column="0"  Grid.Row="0" Background="Black" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Hidden"/>
+
+            <Image Name="img1" Source="media\img1.jpg" Grid.Column="0"  Grid.Row="0" Visibility="Hidden"/>
+            <Border Name="border1" Background="darkturquoise" Grid.Column="0"  Grid.Row="0" Visibility="Hidden" Opacity="0.5"/>
+            <Image Name="img2" Source="media\img2.jpg" Grid.Column="1"  Grid.Row="0" Visibility="Hidden"/>
+            <Border Name="border2" Background="darkturquoise" Grid.Column="1"  Grid.Row="0" Visibility="Hidden" Opacity="0.5"/>
+            <Image Name="img3" Source="media\img3.jpg" Grid.Column="0"  Grid.Row="1" Visibility="Hidden"/>
+            <Border Name="border3" Background="darkturquoise" Grid.Column="0"  Grid.Row="1" Visibility="Hidden" Opacity="0.5"/>
+            <Image Name="img4" Source="media\img4.jpg" Grid.Column="1"  Grid.Row="1" Visibility="Hidden"/>
+            <Border Name="border4" Background="darkturquoise" Grid.Column="1"  Grid.Row="1" Visibility="Hidden" Opacity="0.5"/>
+
+            <Ellipse Name="clickCircle1" Grid.Column="0"  Grid.Row="0" Fill="Yellow" Opacity="0.8" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" Width="200" Height="200"/>
+            <Ellipse Name="clickCircle2" Grid.Column="1"  Grid.Row="0" Fill="Yellow" Opacity="0.8" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" Width="200" Height="200"/>
+            <Ellipse Name="clickCircle3" Grid.Column="0"  Grid.Row="1" Fill="Yellow" Opacity="0.8" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" Width="200" Height="200"/>
+            <Ellipse Name="clickCircle4" Grid.Column="1"  Grid.Row="1" Fill="Yellow" Opacity="0.8" Visibility="Hidden" RenderTransformOrigin="0.5,0.5" Width="200" Height="200"/>
+        </Grid>
+
+        <Grid Name="playVideo" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+            <!--<Grid.ColumnDefinitions>
+                <ColumnDefinition Width="16*" />
+                <ColumnDefinition Width="48*" />
+                <ColumnDefinition Width="16*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="27*" />
+                <RowDefinition Height="9*" />
+            </Grid.RowDefinitions>-->
+            <MediaElement x:Name="video1" LoadedBehavior="Manual" Source="media/video1.mp4"  Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
+            <MediaElement x:Name="video2" LoadedBehavior="Manual" Source="media/video2.mp4"  Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
+            <MediaElement x:Name="video3" LoadedBehavior="Manual" Source="media/video3.mp4"  Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
+            <MediaElement x:Name="video4" LoadedBehavior="Manual" Source="media/video4.mp4"  Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
+        </Grid>
+
+        <Border Name="clickFinish" Background="Black" Opacity="0.9" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="3" Visibility="Hidden">
+            <Grid>
+                <TextBlock Name="clickFinishText1" Foreground="AliceBlue" Text="恭喜你完成了點選功能的評估!"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+                <TextBlock Name="clickFinishText2" Foreground="AliceBlue" Text="想更了解Eyeplayer嗎? 請觀看教學影片" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+            </Grid>
+        </Border>
+
+        <Border Name="tutorialFinish" Background="Black" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="3" Visibility="Hidden">
+            <Grid>
+                <Image Width="400" Height="400" Source="media/logo.png"></Image>
+            </Grid>
+        </Border>
+
+        <MediaElement x:Name="eyeplayerVideo" LoadedBehavior="Manual" Source="media/video5.mp4" Volume="1"  Visibility="Hidden"  Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"/>
+        
+        <Canvas x:Name="canvasObj" Grid.Column="3" Grid.Row="1"/>
+
+    </Grid>
+</Window>
